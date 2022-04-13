@@ -1,27 +1,27 @@
 import express from 'express'
 import path from "path"
-import livereload from 'livereload';
-import livereloadMiddleware from 'connect-livereload';
+import webpackDevMiddleware from "webpack-dev-middleware";
+import webpack from "webpack"
 
+const webpackConfig = require("../webpack.config")
+const compiler = webpack(webpackConfig);
 const app = express();
-
-const liveServer = livereload.createServer({
-  exts: ['html', 'css', 'ejs'],
-  debug: true
-});
-
-liveServer.watch("./");
 
 app.use('/build', express.static(path.join(__dirname, '/../build')));
 app.use('/styles', express.static(path.join(__dirname, '/styles')));
 app.use('/images', express.static(path.join(__dirname, '/../public/images')));
-app.use(livereloadMiddleware());
 
 app.all("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/index.html"))
 })
 
+// app.use(
+//   webpackDevMiddleware(compiler, {
+//     publicPath: webpackConfig.output.publicPath,
+//     stats: {colors: true},
+//   })
+// );
 
 app.listen(5000, () => {
-  console.log("4000")
+  console.log("5000")
 })
