@@ -1,11 +1,13 @@
 import findDom from "../lib/findDom";
 import parseTemplate from "./parseTemplate";
+import setStyle from "~/core/setStyle";
+import domContentLoaded from "~/core/domContentLoaded";
 
 interface ITemplateFunction {
   afterLoad?: () => void
+  styles?: string
 
   (input?: any): string
-
 }
 
 export default function render(templateFunction: ITemplateFunction, root: string = "#main", input: any = undefined) {
@@ -17,7 +19,6 @@ export default function render(templateFunction: ITemplateFunction, root: string
 
     const foundTemplate = parseTemplate(templateString)
     const template = findDom(foundTemplate);
-    
 
     if (template) {
       const clone = document.importNode(template, true) as HTMLTemplateElement
@@ -29,6 +30,13 @@ export default function render(templateFunction: ITemplateFunction, root: string
         templateFunction.afterLoad()
       }
 
+      domContentLoaded(() => {
+        if (templateFunction.styles) {
+          const root = findDom(`${foundTemplate}_container`)
+          console.log(root)
+          if (root) setStyle(root, templateFunction.styles)
+        }
+      })
     }
   }
 }
