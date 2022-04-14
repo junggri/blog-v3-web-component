@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "classnames": "^2.3.1",
     "connect-livereload": "^0.6.1",
     "express": "^4.17.3",
     "immer": "^9.0.12",

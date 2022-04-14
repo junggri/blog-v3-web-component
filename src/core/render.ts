@@ -33,7 +33,6 @@ export default function render(templateFunction: ITemplateFunction, root: string
       domContentLoaded(() => {
         if (templateFunction.styles) {
           const root = findDom(`${foundTemplate}_container`)
-          console.log(root)
           if (root) setStyle(root, templateFunction.styles)
         }
       })

@@ -3,11 +3,10 @@ import render from "~/core/render";
 import Header from "~/component/Header/Header";
 import styles from "./index.module.scss";
 
-console.log(styles)
 const Index = () => {
   return template(`
       <div id="index_container">
-        <div>asdasd</div>
+        <div class="test">asdasd</div>
         <div>asdasd</div>
         <div>asdasd</div>
         
